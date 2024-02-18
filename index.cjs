@@ -194,5 +194,75 @@ module.exports = {
         "no-console": "off",
       },
     },
+    {
+      files: "*.test.*",
+      plugins: ["vitest"],
+      extends: ["plugin:vitest/recommended"],
+      rules: {
+        "no-restricted-imports": [
+          "error",
+          {
+            paths: [
+              {
+                name: "vitest",
+                message: `Please do not import Vitest functions directly, they are available in the global scope`,
+              },
+            ],
+          },
+        ],
+        // We want to be able to ignore type errors because we may be testing
+        // conditions that require us to specify incorrect types:
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/no-non-null-assertion": "off",
+        // This just adds a lot of extra warnings/noise to the lint output:
+        "@typescript-eslint/strict-boolean-expressions": "off",
+        "no-lone-blocks": "off",
+        /* Vitest Rule Errors */
+        "vitest/consistent-test-filename": [
+          "error",
+          { pattern: ".*\\.test\\.[tj]sx?$" },
+        ],
+        "vitest/consistent-test-it": ["error", { fn: "it" }],
+        "vitest/expect-expect": [
+          "error",
+          // If you add a custom assertion, you need to make sure it starts with
+          // `expect`. See `~/test/customExpect.ts` for examples:
+          { assertFunctionNames: ["expect*"] },
+        ],
+        "vitest/no-alias-methods": "error",
+        "vitest/no-done-callback": "error",
+        "vitest/no-mocks-import": "error",
+        "vitest/no-standalone-expect": "error",
+        "vitest/no-test-return-statement": "error",
+        "vitest/prefer-comparison-matcher": "error",
+        "vitest/prefer-each": "error",
+        "vitest/prefer-equality-matcher": "error",
+        "vitest/prefer-hooks-in-order": "error",
+        "vitest/prefer-hooks-on-top": "error",
+        "vitest/prefer-lowercase-title": "error",
+        // If you're nesting describe blocks more than 3 levels deep, you probably
+        // need to tweak your tests or split them up.
+        "vitest/max-nested-describe": ["error", { max: 3 }],
+        "vitest/require-top-level-describe": [
+          "error",
+          { maxNumberOfTopLevelDescribes: 1 },
+        ],
+
+        /* Vitest Rule Warnings */
+        // Use `toEqual` for objects/arrays and `toBe` for primitives:
+        "vitest/prefer-to-be": "warn",
+        // Instead of `expect(someArray.length).toBe(5)`,
+        // use `expect(someArray).toHaveLength(5):
+        "vitest/prefer-to-have-length": "warn",
+        // Instead of `expect(a.includes(b)).toBe(true);`,
+        // use `expect(a).toContain(b);`:
+        "vitest/prefer-to-contain": "warn",
+        "vitest/prefer-todo": "warn",
+        "vitest/prefer-mock-promise-shorthand": "warn",
+        // Any setup or teardown code (even for things like initializing local
+        // variables) should be done in a before* or after* hook:
+        "vitest/require-hook": "warn",
+      },
+    },
   ],
 };
