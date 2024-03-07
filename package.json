@@ -19,12 +19,13 @@
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
-    "eslint": "^8.57.0",
+    "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-unicorn": "^51.0.1",
+    "eslint-plugin-vitest": "^0.3.22",
     "prettier": "^3.2.5",
-    "typescript": "^5.4.2"
+    "typescript": "^5"
   },
   "devDependencies": {
     "eslint": "^8",
