@@ -183,6 +183,15 @@ module.exports = {
     "@typescript-eslint/indent": "off",
   },
   overrides: [
+    // Most config files live in the root and need to use a default export to work.
+    // Rather than explicitly adding an `eslint-disable` comment, we just disable
+    // the rule globally:
+    {
+      files: ["./*.cts", "./*.ts", "./*.mts"],
+      rules: {
+        "import/no-default-export": "off",
+      },
+    },
     {
       files: ["*.cjs", "*.js", "*.mjs"],
       rules: {
