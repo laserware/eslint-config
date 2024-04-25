@@ -1,3 +1,8 @@
+"use strict";
+
+// prettier-ignore
+const nonSourceFilePattern = "*.svelte|*.css|*.*?raw|*.*?sharedworker|*.*?url|*.*?worker";
+
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
@@ -120,28 +125,77 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "off",
     "no-await-in-loop": "off",
     "no-continue": "off",
-    curly: ["error", "all"],
-    eqeqeq: "error",
+    "curly": ["error", "all"],
+    "eqeqeq": "error",
     "max-params": ["error", 3],
-    yoda: ["error", "never"],
+    "yoda": ["error", "never"],
     "import/no-default-export": "error",
     "import/order": [
       "error",
       {
-        groups: [
+        "groups": [
           "builtin",
           "external",
           "internal",
-          ["parent", "sibling"],
+          "parent",
+          "sibling",
+          "index",
           "object",
         ],
         "newlines-between": "always-and-inside-groups",
-        distinctGroup: false,
-        pathGroupsExcludedImportTypes: ["builtin"],
-        alphabetize: {
-          order: "asc",
-          caseInsensitive: true,
+        "distinctGroup": true,
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true,
         },
+        "pathGroups": [
+          // Source files (i.e. JS/TS files) that use a tilde path alias should
+          // go before any parent/sibling imports:
+          {
+            "pattern": `../**/!(${nonSourceFilePattern})`,
+            "group": "parent",
+          },
+          // Parent/sibling source files (i.e. JS/TS files) go next:
+          {
+            "pattern": `./**/!(${nonSourceFilePattern})`,
+            "group": "sibling",
+          },
+          {
+            "pattern": `~/**/!(${nonSourceFilePattern})`,
+            "group": "internal",
+          },
+          // Svelte files should be in their own group:
+          {
+            "pattern": "~/**/*.svelte",
+            "group": "sibling",
+            "position": "after",
+          },
+          {
+            "pattern": "{.,..}/**/*.svelte",
+            "group": "sibling",
+            "position": "after",
+          },
+          {
+            "pattern": "~/**/*.css",
+            "group": "object",
+            "position": "after",
+          },
+          {
+            "pattern": "{.,..}/**/*.css",
+            "group": "object",
+            "position": "after",
+          },
+          {
+            "pattern": `~/**/*.*?(raw|worker|sharedworker|url)`,
+            "group": "object",
+            "position": "after",
+          },
+          {
+            "pattern": `{.,..}/**/*.*?(raw|worker|sharedworker|url)`,
+            "group": "object",
+            "position": "after",
+          },
+        ],
       },
     ],
     // Enforces `err` as the variable name in a catch statement.
@@ -179,7 +233,7 @@ module.exports = {
     "unicorn/prefer-add-event-listener": "error",
     "unicorn/prefer-query-selector": "error",
     "unicorn/throw-new-error": "error",
-    indent: "off",
+    "indent": "off",
     "@typescript-eslint/indent": "off",
   },
   overrides: [

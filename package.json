@@ -3,6 +3,10 @@
   "version": "3.0.0",
   "description": "ESLint configuration for Laserware.",
   "main": "index.cjs",
+  "exports": {
+    ".": "./index.cjs",
+    "./svelte": "./svelte.cjs"
+  },
   "repository": {
     "url": "git+https://github.com/laserware/eslint-config.git",
     "type": "git"
@@ -21,8 +25,8 @@
     "prettier": "prettier --write \"./*.cjs\""
   },
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.7.0",
-    "@typescript-eslint/parser": "^7.7.0",
+    "@typescript-eslint/eslint-plugin": "^7.7.1",
+    "@typescript-eslint/parser": "^7.7.1",
     "eslint": "^8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
@@ -47,6 +51,7 @@
     "access": "public"
   },
   "prettier": {
-    "trailingComma": "all"
+    "trailingComma": "all",
+    "quoteProps": "preserve"
   }
 }
