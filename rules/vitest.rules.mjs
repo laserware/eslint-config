@@ -96,9 +96,6 @@ export const vitestLintRules = {
   // https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-todo.md
   "vitest/prefer-todo": "warn",
 
-  // https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-vi-mocked.md
-  "vitest/prefer-vi-mocked": "error",
-
   // https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-hook.md
   "vitest/require-hook": "warn",
 
