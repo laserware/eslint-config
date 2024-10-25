@@ -78,6 +78,11 @@ export const typescriptLintRules = {
   // https://typescript-eslint.io/rules/no-non-null-assertion
   "@typescript-eslint/no-non-null-assertion": "off",
 
+  // Prefer the newer ES6-style imports over require().
+  // We still need to be able to require Electron though.
+  // https://typescript-eslint.io/rules/no-require-imports
+  "@typescript-eslint/no-require-imports": ["error", { allow: ["electron"] }],
+
   // https://typescript-eslint.io/rules/no-unused-vars
   "@typescript-eslint/no-unused-vars": [
     "error",

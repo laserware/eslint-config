@@ -23,7 +23,11 @@ export const coreLintRules = {
   // https://eslint.org/docs/latest/rules/no-console
   "no-console": ["error", { allow: ["debug", "error"] }],
 
-  // Need to disable this to allow for defining multiple signatures.
+  // Need to disable this to allow for defining multiple signatures with TypeScript.
+  // https://eslint.org/docs/latest/rules/no-dupe-class-members
+  "no-dupe-class-members": "off",
+
+  // Need to disable this to allow for defining multiple signatures with TypeScript.
   // https://eslint.org/docs/latest/rules/no-redeclare
   "no-redeclare": "off",
 

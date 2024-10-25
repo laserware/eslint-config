@@ -127,5 +127,9 @@ export function getBaseConfigs(options) {
         "@typescript-eslint/no-var-requires": "off",
       },
     },
+
+    {
+      ignores: ["node_modules", "**/*.snap"],
+    },
   ];
 }
