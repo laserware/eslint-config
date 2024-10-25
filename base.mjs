@@ -1,4 +1,5 @@
 import eslint from "@eslint/js";
+import importPlugin from "eslint-plugin-import";
 import unicornPlugin from "eslint-plugin-unicorn";
 import vitestPlugin from "eslint-plugin-vitest";
 import globals from "globals";
@@ -47,7 +48,6 @@ export function getBaseConfigs(options) {
         },
         parser: tsEslint.parser,
         parserOptions: {
-          ecmaVersion: "latest",
           project: [...tsConfigFiles],
           tsConfigRootDir,
         },
@@ -64,10 +64,15 @@ export function getBaseConfigs(options) {
 
     /* Import Config */
     {
+      // We include Svelte files to avoid needing to duplicate this configuration
+      // for Svelte:
       files: [...filePatterns.base, ...filePatterns.svelte],
       languageOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
+      },
+      plugins: {
+        import: importPlugin,
       },
       rules: importLintRules,
       settings: {
