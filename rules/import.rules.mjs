@@ -8,9 +8,10 @@ export const importLintRules = {
   ...importPlugin.flatConfigs.recommended.rules,
   ...importPlugin.flatConfigs.typescript.rules,
 
-  // Default exports are the devil.
+  // Explicitly disabling this because it's handled by ESLint's
+  // `no-restricted-exports` rule. Default exports are the devil.
   // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md
-  "import/no-default-export": "error",
+  "import/no-default-export": "off",
 
   // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-useless-path-segments.md
   "import/no-useless-path-segments": "error",

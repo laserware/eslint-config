@@ -23,6 +23,10 @@ export const coreLintRules = {
   // https://eslint.org/docs/latest/rules/no-console
   "no-console": ["error", { allow: ["debug", "error"] }],
 
+  // Need to disable this to allow for defining multiple signatures.
+  // https://eslint.org/docs/latest/rules/no-redeclare
+  "no-redeclare": "off",
+
   // Disallow specified names in exports.
   // https://eslint.org/docs/latest/rules/no-restricted-exports
   "no-restricted-exports": [
@@ -48,7 +52,11 @@ export const coreLintRules = {
   // https://eslint.org/docs/latest/rules/no-undef
   "no-undef": "off",
 
-  // Disabling this because its handled by the TypeScript plugin:
+  // This is handled by TypeScript:
+  // https://eslint.org/docs/latest/rules/no-unused-vars
+  "no-unused-vars": "off",
+
+  // Disabling this because it's handled by the TypeScript plugin:
   "no-use-before-define": "off",
 
   // Throws an error if you use `if ("red" === color)` instead of

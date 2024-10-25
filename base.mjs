@@ -20,6 +20,17 @@ import { vitestLintRules } from "./rules/vitest.rules.mjs";
 
 export const filePatterns = {
   base: ["**/*.js", "**/*.mjs", "**/*.mts", "**/*.ts"],
+  configs: [
+    "*.config.*",
+    "vite.config.*",
+    "vitest.config.*",
+    "./*.cjs",
+    "./*.cts",
+    "./*.js",
+    "./*.mjs",
+    "./*.mts",
+    "./*.ts",
+  ],
   javascript: ["**/*.cjs", "**/*.js", "**/*.mjs"],
   svelte: ["**/*.svelte", "*.svelte", "**/*.svelte.ts", "*.svelte.ts"],
   tests: ["**/*.test.*"],
@@ -104,17 +115,16 @@ export function getBaseConfigs(options) {
       },
     },
 
-    /* Node Files Config */
+    /* JavaScript/Config Files Config */
     {
-      files: filePatterns.javascript,
+      files: [...filePatterns.configs, ...filePatterns.javascript],
       rules: {
         "no-console": "off",
+        "no-restricted-exports": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/naming-convention": "off",
         "@typescript-eslint/no-var-requires": "off",
-        "import/no-default-export": "off",
-        "import/no-unresolved": "off",
       },
     },
   ];
