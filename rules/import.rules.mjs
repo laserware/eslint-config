@@ -13,6 +13,10 @@ export const importLintRules = {
   // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-default-export.md
   "import/no-default-export": "off",
 
+  // We disable this in favor of `no-duplicate-imports` because this causes
+  // issues with stuff like `svelte` and `svelte/store`.
+  "import/no-duplicates": "off",
+
   // https://github.com/import-js/eslint-plugin-import/blob/main/docs/rules/no-useless-path-segments.md
   "import/no-useless-path-segments": "error",
 

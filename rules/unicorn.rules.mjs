@@ -36,10 +36,6 @@ export const unicornLintRules = {
   // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-dom-node-append.md
   "unicorn/prefer-dom-node-append": "error",
 
-  // Prefer EventTarget over EventEmitter.
-  // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-event-target.md
-  "unicorn/prefer-event-target": "error",
-
   // Prefer KeyboardEvent#key over KeyboardEvent#keyCode.
   // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-keyboard-event-key.md
   "unicorn/prefer-keyboard-event-key": "error",

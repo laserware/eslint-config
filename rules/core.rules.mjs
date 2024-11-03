@@ -27,6 +27,9 @@ export const coreLintRules = {
   // https://eslint.org/docs/latest/rules/no-dupe-class-members
   "no-dupe-class-members": "off",
 
+  // https://eslint.org/docs/latest/rules/no-duplicate-imports
+  "no-duplicate-imports": "error",
+
   // Need to disable this to allow for defining multiple signatures with TypeScript.
   // https://eslint.org/docs/latest/rules/no-redeclare
   "no-redeclare": "off",

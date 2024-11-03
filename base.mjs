@@ -37,6 +37,17 @@ export const filePatterns = {
 };
 
 /**
+ * All rules used in ESLint configuration keyed by the plugin name.
+ */
+export const baseRules = {
+  core: coreLintRules,
+  import: importLintRules,
+  typescript: typescriptLintRules,
+  unicorn: unicornLintRules,
+  vitest: vitestLintRules,
+};
+
+/**
  * Returns the ESLint base configuration array for JS/TS files.
  *
  * @param {ConfigOptions} options Options for the configuration.
@@ -59,7 +70,7 @@ export function getBaseConfigs(options) {
         },
         parser: tsEslint.parser,
         parserOptions: {
-          project: [...tsConfigFiles],
+          project: tsConfigFiles,
           tsConfigRootDir,
         },
       },
@@ -89,8 +100,8 @@ export function getBaseConfigs(options) {
       settings: {
         "import/resolver": {
           typescript: {
-            project: [...tsConfigFiles],
-            extensions: [".d.ts", ".json", ".mjs", ".svelte", ".ts", ".mts"],
+            project: tsConfigFiles,
+            extensions: [".d.ts", ".json", ".mjs", ".mts", ".svelte", ".ts"],
           },
         },
       },

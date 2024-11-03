@@ -5,13 +5,20 @@ import globals from "globals";
 import svelteParser from "svelte-eslint-parser";
 import tsEslint from "typescript-eslint";
 
-import { getBaseConfigs, filePatterns } from "./base.mjs";
-import { coreLintRules } from "./rules/core.rules.mjs";
-import { importLintRules } from "./rules/import.rules.mjs";
-import { typescriptLintRules } from "./rules/typescript.rules.mjs";
-import { unicornLintRules } from "./rules/unicorn.rules.mjs";
+import { getBaseConfigs, filePatterns, baseRules } from "./base.mjs";
 import { svelteLintRules } from "./rules/svelte.rules.mjs";
 
+/**
+ * Svelte-specific ESLint rules.
+ */
+export const svelteRules = svelteLintRules;
+
+/**
+ * Returns an array of ESLint configuration objects with rules specific to
+ * Svelte projects.
+ *
+ * @param {ConfigOptions} options Options for the configuration.
+ */
 export function getSvelteConfigs(options) {
   const { tsConfigFiles = [], tsConfigRootDir } = options;
 
@@ -34,7 +41,7 @@ export function getSvelteConfigs(options) {
           ecmaVersion: "latest",
           extraFileExtensions: [".svelte"],
           parser: tsEslint.parser,
-          project: [...tsConfigFiles],
+          project: tsConfigFiles,
           tsConfigRootDir,
         },
       },
@@ -43,11 +50,19 @@ export function getSvelteConfigs(options) {
         unicorn: unicornPlugin,
       },
       rules: {
-        ...coreLintRules,
-        ...importLintRules,
+        ...baseRules.core,
+        ...baseRules.import,
+        ...baseRules.typescript,
+        ...baseRules.unicorn,
         ...svelteLintRules,
-        ...typescriptLintRules,
-        ...unicornLintRules,
+      },
+      settings: {
+        "import/resolver": {
+          typescript: {
+            project: tsConfigFiles,
+            extensions: [".d.ts", ".json", ".mjs", ".mts", ".svelte", ".ts"],
+          },
+        },
       },
     },
   ];

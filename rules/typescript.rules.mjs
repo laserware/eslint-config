@@ -110,22 +110,4 @@ export const typescriptLintRules = {
       variables: true,
     },
   ],
-
-  // Forbids usage of non-boolean types in expressions where a boolean
-  // is expected. boolean and never types are always allowed.
-  // https://typescript-eslint.io/rules/strict-boolean-expressions
-  "@typescript-eslint/strict-boolean-expressions": [
-    "error",
-    {
-      allowAny: true,
-      allowNullableBoolean: true,
-      allowNullableEnum: false,
-      allowNullableNumber: false,
-      allowNullableObject: false,
-      allowNullableString: false,
-      allowNumber: true,
-      allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false,
-      allowString: false,
-    },
-  ],
 };
