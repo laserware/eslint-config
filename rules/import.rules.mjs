@@ -42,7 +42,11 @@ export const importLintRules = {
       "newlines-between": "always-and-inside-groups",
       pathGroups: [
         {
-          pattern: "{.,..}/**/!(*.svelte|*.css)",
+          pattern: "../**/!(*.svelte|*.css)",
+          group: "parent",
+        },
+        {
+          pattern: "./**/!(*.svelte|*.css)",
           group: "sibling",
         },
         {
