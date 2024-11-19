@@ -62,13 +62,9 @@ export const typescriptLintRules = {
   // https://typescript-eslint.io/rules/no-explicit-any
   "@typescript-eslint/no-explicit-any": "off",
 
-  // Infer the types for obvious stuff, but still allow explicit
-  // annotations for params and class properties.
+  // I want to be able to explicitly specify a type annotation if desired.
   // https://typescript-eslint.io/rules/no-inferrable-types
-  "@typescript-eslint/no-inferrable-types": [
-    "error",
-    { ignoreParameters: true, ignoreProperties: true },
-  ],
+  "@typescript-eslint/no-inferrable-types": "off",
 
   // Namespaces are handy, I want to be able to use them.
   // https://typescript-eslint.io/rules/no-namespace

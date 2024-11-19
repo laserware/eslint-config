@@ -23,12 +23,11 @@ export const filePatterns = {
   typescript: ["**/*.cts", "**/*.mts", "**/*.ts"],
   // prettier-ignore
   configs: [
-    "./*.config.*",
-    "./*.cjs", "./*.cts",
-    "./*.mjs", "./*.mts",
-    "./*.js", "./*.ts",
+    "**/*.config.{js,ts,cjs,cts,mjs,mts}",
+    "**/.*rc",
+    "**/.*rc.{js,ts,cjs,cts,mjs,mts}",
   ],
-  svelte: ["**/*.svelte", "*.svelte", "**/*.svelte.ts", "*.svelte.ts"],
+  svelte: ["**/*.svelte", "**/*.svelte.ts"],
   tests: ["**/*.test.*"],
 };
 
@@ -138,7 +137,7 @@ export function getBaseConfigs(options) {
 
     /* JavaScript/Config Files Config */
     {
-      files: [...filePatterns.configs, ...filePatterns.javascript],
+      files: [...filePatterns.javascript, ...filePatterns.configs],
       rules: {
         "no-console": "off",
         "no-restricted-exports": "off",
@@ -146,6 +145,34 @@ export function getBaseConfigs(options) {
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/naming-convention": "off",
         "@typescript-eslint/no-var-requires": "off",
+      },
+    },
+
+    // Ensure you can use `require` in CommonJS files:
+    {
+      files: ["**/*.cjs", "**/*.cts"],
+      rules: {
+        "@typescript-eslint/no-require-imports": "off",
+      },
+    },
+
+    // Ensure you can define Vite __DEFINED_CONSTANTS__ in declaration files.
+    // We also want to be able to use empty interfaces and objects in declaration
+    // files:
+    {
+      files: ["**/*.d.ts"],
+      rules: {
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/no-empty-object-type": "off",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            selector: "variable",
+            format: ["camelCase", "UPPER_CASE", "PascalCase"],
+            leadingUnderscore: "allowDouble",
+            trailingUnderscore: "allowDouble",
+          },
+        ],
       },
     },
 

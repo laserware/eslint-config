@@ -69,6 +69,11 @@ export function getSvelteConfigs(options) {
         ...baseRules.typescript,
         ...baseRules.unicorn,
         ...svelteLintRules,
+        // Duplicate import checks cause issues with importing from the same
+        // file/library in a module context script block and a regular script
+        // block. This is something I do fairly often, so I don't want it to
+        // deal with the errors:
+        "no-duplicate-imports": "off",
       },
       settings: {
         "import/resolver": {
