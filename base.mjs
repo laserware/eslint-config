@@ -32,10 +32,16 @@ export const filePatterns = {
   tests: ["**/*.test.*"],
 };
 
+export const plugins = {
+  importPlugin,
+  unicornPlugin,
+  vitestPlugin,
+};
+
 /**
  * All rules used in ESLint configuration keyed by the plugin name.
  */
-export const baseRules = {
+export const rules = {
   core: coreLintRules,
   import: importLintRules,
   typescript: typescriptLintRules,
@@ -57,11 +63,10 @@ export function getBaseConfigs(options) {
 
     /* JS/TS Config */
     {
-      // prettier-ignore
       files: [
+        ...filePatterns.configs,
         ...filePatterns.javascript,
         ...filePatterns.typescript,
-        ...filePatterns.configs,
       ],
       languageOptions: {
         globals: {
@@ -89,7 +94,11 @@ export function getBaseConfigs(options) {
     {
       // We include Svelte files to avoid needing to duplicate this configuration
       // for Svelte:
-      files: [...filePatterns.typescript, ...filePatterns.svelte],
+      files: [
+        ...filePatterns.javascript,
+        ...filePatterns.typescript,
+        ...filePatterns.svelte,
+      ],
       languageOptions: {
         ecmaVersion: "latest",
         sourceType: "module",

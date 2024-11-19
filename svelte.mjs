@@ -5,13 +5,27 @@ import globals from "globals";
 import svelteParser from "svelte-eslint-parser";
 import tsEslint from "typescript-eslint";
 
-import { getBaseConfigs, filePatterns, baseRules } from "./base.mjs";
+import {
+  getBaseConfigs,
+  filePatterns,
+  rules as baseRules,
+  plugins as basePlugins,
+} from "./base.mjs";
 import { svelteLintRules } from "./rules/svelte.rules.mjs";
 
-/**
- * Svelte-specific ESLint rules.
- */
-export const svelteRules = svelteLintRules;
+// Forward exports so you don't need to import them from `base` at the
+// point of use.
+export { filePatterns } from "./base.mjs";
+
+export const rules = {
+  ...baseRules,
+  svelte: svelteLintRules,
+};
+
+export const plugins = {
+  ...basePlugins,
+  sveltePlugin,
+};
 
 /**
  * Returns an array of ESLint configuration objects with rules specific to
