@@ -28,13 +28,14 @@ export const unicornLintRules = {
   // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/no-new-buffer.md
   "unicorn/no-new-buffer": "error",
 
-  // Prefer .addEventListener() and .removeEventListener() over on-functions.
+  // Using EventTarget in Node.js isn't quite there yet.
   // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-add-event-listener.md
-  "unicorn/prefer-add-event-listener": "error",
+  "unicorn/prefer-add-event-listener": "off",
 
-  // Prefer Node#append() over Node#appendChild().
+  // Node#appendChild() returns the value of the appended node, so I prefer to
+  // continue using it.
   // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-dom-node-append.md
-  "unicorn/prefer-dom-node-append": "error",
+  "unicorn/prefer-dom-node-append": "off",
 
   // Prefer KeyboardEvent#key over KeyboardEvent#keyCode.
   // https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-keyboard-event-key.md

@@ -19,19 +19,15 @@ import { vitestLintRules } from "./rules/vitest.rules.mjs";
  */
 
 export const filePatterns = {
-  base: ["**/*.js", "**/*.mjs", "**/*.mts", "**/*.ts"],
+  javascript: ["**/*.cjs", "**/*.mjs", "**/*.js"],
+  typescript: ["**/*.cts", "**/*.mts", "**/*.ts"],
+  // prettier-ignore
   configs: [
-    "*.config.*",
-    "vite.config.*",
-    "vitest.config.*",
-    "./*.cjs",
-    "./*.cts",
-    "./*.js",
-    "./*.mjs",
-    "./*.mts",
-    "./*.ts",
+    "./*.config.*",
+    "./*.cjs", "./*.cts",
+    "./*.mjs", "./*.mts",
+    "./*.js", "./*.ts",
   ],
-  javascript: ["**/*.cjs", "**/*.js", "**/*.mjs"],
   svelte: ["**/*.svelte", "*.svelte", "**/*.svelte.ts", "*.svelte.ts"],
   tests: ["**/*.test.*"],
 };
@@ -61,7 +57,12 @@ export function getBaseConfigs(options) {
 
     /* JS/TS Config */
     {
-      files: filePatterns.base,
+      // prettier-ignore
+      files: [
+        ...filePatterns.javascript,
+        ...filePatterns.typescript,
+        ...filePatterns.configs,
+      ],
       languageOptions: {
         globals: {
           ...globals.builtin,
@@ -88,7 +89,7 @@ export function getBaseConfigs(options) {
     {
       // We include Svelte files to avoid needing to duplicate this configuration
       // for Svelte:
-      files: [...filePatterns.base, ...filePatterns.svelte],
+      files: [...filePatterns.typescript, ...filePatterns.svelte],
       languageOptions: {
         ecmaVersion: "latest",
         sourceType: "module",

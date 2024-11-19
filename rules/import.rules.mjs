@@ -54,7 +54,12 @@ export const importLintRules = {
           group: "internal",
         },
         {
-          pattern: "{.,..}/**/*.svelte",
+          pattern: "../**/*.svelte",
+          group: "sibling",
+          position: "after",
+        },
+        {
+          pattern: "./**/*.svelte",
           group: "sibling",
           position: "after",
         },

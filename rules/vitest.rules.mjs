@@ -18,6 +18,11 @@ export const vitestLintRules = {
       ],
     },
   ],
+  // We want to be able to ignore type errors because we may be testing
+  // conditions that require us to specify incorrect types:
+  "@typescript-eslint/ban-ts-comment": "off",
+  "@typescript-eslint/naming-convention": "off",
+  "@typescript-eslint/no-non-null-assertion": "off",
   "@typescript-eslint/strict-boolean-expressions": "off",
 
   /* Vitest Rules */

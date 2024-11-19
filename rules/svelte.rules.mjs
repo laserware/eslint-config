@@ -61,14 +61,16 @@ export const svelteLintRules = {
       order: [
         "this",
         "bind:this",
-        { match: "/^data-*/u", sort: "alphabetical" },
         "id",
         "name",
+        { match: "/^data-*/u", sort: "alphabetical" },
         "slot",
+        // `--style-props` (Alphabetical order within the same group.)
         { match: "/^--/u", sort: "alphabetical" },
         ["style", "/^style:/u"],
         "class",
         { match: "/^class:/u", sort: "alphabetical" },
+        // Other attributes. (Alphabetical order within the same group.)
         {
           match: [
             "!/:/u",
